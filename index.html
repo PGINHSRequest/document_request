@@ -1,37 +1,66 @@
-<h2>New Document Request Received</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document Request</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>School Document Request Form</h1>
+    <p>Welcome to <em>QUESTIFY's</em> request form, please fill up the needed information for a smooth transaction.</p>
+    <ul>
+      <li>Fill up your name in Last Name, First Name, and Middle Initial format.</li>
+      <li>Put your LRN for verification.</li>
+      <li>Put your current Grade and Section.</li>
+      <li>Put your active email address for advance notification.</li>
+      <li>Select your needed document. If not in the choices, add more info in the box.</li>
+      <li>Lastly, submit your request and wait for your successful email notification.</li>
+    </ul>
 
-<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%;">
-  <tr>
-    <th align="left">Full Name</th>
-    <td>{{full_name}}</td>
-  </tr>
+    <form id="requestForm">
+      <input name="full_name" required type="text" placeholder="Full Name"><br>
+      <input name="students_lrn" required type="text" placeholder="Student's LRN"><br>
+      <input name="grade_section" required type="text" placeholder="Your Grade and Section"><br>
+      <input name="email" required type="email" placeholder="Your Email"><br>
+      <select name="document_type" required>
+        <option value="">-- Select Document --</option>
+        <option value="Transcript">Transcript</option>
+        <option value="Certificate">Certificate</option>
+        <option value="Recommendation Letter">Recommendation Letter</option>
+      </select><br>
+      <textarea name="additional_info" placeholder="Additional Info (if any)"></textarea><br>
+      <button type="submit">Submit Request</button>
+    </form>
 
-  <tr>
-    <th align="left">LRN</th>
-    <td>{{student_lrn}}</td>
-  </tr>
+    <p id="status"></p>
+  </div>
 
-  <tr>
-    <th align="left">Grade & Section</th>
-    <td>{{grade_section}}</td>
-  </tr>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS
+    (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // <-- Replace with your EmailJS public key
+    })();
 
-  <tr>
-    <th align="left">Email</th>
-    <td>{{email}}</td>
-  </tr>
+    const form = document.getElementById("requestForm");
+    const statusText = document.getElementById("status");
 
-  <tr>
-    <th align="left">Document Requested</th>
-    <td>{{document_type}}</td>
-  </tr>
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
 
-  <tr>
-    <th align="left">Additional Info</th>
-    <td>{{additional_info}}</td>
-  </tr>
-</table>
+      emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+      .then(() => {
+        statusText.textContent = "Request submitted successfully!";
+        form.reset();
+      }, (err) => {
+        statusText.textContent = "Failed to submit request. Try again.";
+        console.error("EmailJS error:", err);
+      });
+    });
+  </script>
+</body>
+</html>
 
-<p style="margin-top: 20px;">
-  This request was submitted through the School Document Request Form.
-</p>

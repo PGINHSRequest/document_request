@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<h2><span style="font-family: impact, sans-serif; font-size: 24pt;">Student Document Request Form</span></h2>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document Request</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+   <h2><span style="font-family: impact, sans-serif; font-size: 24pt;">Student Document Request Form</span></h2>
 <p style="text-align: justify;"><span style="font-size: 12pt;">Welcome to <em>QUESTIFY's</em> request form, please fill up the needed </span></p>
 <p><span style="font-size: 12pt;">information and document for smooth transaction.</span></p>
 <ul>
@@ -24,3 +33,13 @@
 <option value="Recommendation Letter">Recommendation Letter</option>
 </select><br><textarea name="additional_info" placeholder="Additional Info (if any)"></textarea><br><button type="submit">Submit Request</button></form>
 <p id="statusMessage"></p>
+      <!-- FormSubmit hidden fields -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Your request has been received. The school admin will process it soon.">
+
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+</body>
+</html>

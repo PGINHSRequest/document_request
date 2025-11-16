@@ -56,11 +56,11 @@
     status.textContent = "Sending...";
     status.style.color = "black";
 
-    emailjs.send("service_kypw3ko", "template_4cmy51i", {
-      name: form.name.value,
-      email: form.email.value,
-      document: form.document.value,
-      notes: form.notes.value
+    emailjs.send("service_kypw3ko", "template_4cmy51", {
+      name: form.name.value, // matches {{name}}
+      email: form.email.value,  // matches {{email}}
+      document: form.document.value, // matches {{document}}
+      notes: form.notes.value // matches {{notes}}
     })
     .then(() => {
       status.style.color = "green";

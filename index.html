@@ -8,31 +8,72 @@
 </head>
 <body>
   <div class="container">
-     <h1>School Document Request Form</h1>
-    <form ="https://formsubmit.co/pginhsrequest@gmail.com" method="POST">
-<h2 style="text-align: left;"><span style="font-family: impact, sans-serif; font-size: 18pt;">Student Document Request Form</span></h2>
-<p style="text-align: left;"><span style="font-size: 12pt;">Welcome to <em>QUESTIFY's</em> request form, please fill up the needed&nbsp;</span><span style="font-size: 12pt;">information and document for smooth transaction.</span></p>
-<ul style="text-align: left;">
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Fill up your name in Last Name, First Name, and&nbsp;</span><span style="font-size: 12pt;">Middle Initial format.</span></li>
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Put your LRN for verification.</span></li>
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Put your current Grade and Section.</span></li>
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Put your active email address for advance notification.</span></li>
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Select your needed document and if not in the choices, </span><span style="font-size: 12pt;">add more infos on the box.</span></li>
-<li style="text-align: justify; font-size: 12pt;"><span style="font-size: 12pt;">Lastly, submit your request and wait for your successful </span><span style="font-size: 12pt;">email notification.</span></li>
-</ul>
-<form id="requestForm" style="padding-left: 40px;"><span style="font-size: 24pt;"><input name="full_name" required="" type="text" placeholder="Full Name"></span><br><span style="font-size: 24pt;"><input name="Student's_LRN" required="" type="text" placeholder="Student's LRN"></span><br><span style="font-size: 24pt;"><input name="Your_Grade_and_Section" required="" type="text" placeholder="Your Grade and Section"></span><br><span style="font-size: 24pt;"><input name="email" required="" type="email" placeholder="Your Email"></span><br><select name="document_type" required="">
-<option value="">-- Select Document --</option>
-<option value="Transcript">Transcript</option>
-<option value="Certificate">Certificate</option>
-<option value="Recommendation Letter">Recommendation Letter</option>
-</select><br><span style="font-size: 24pt;"><textarea name="additional_info" placeholder="Additional Info (if any)"></textarea>
-      <!-- FormSubmit hidden fields -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_autoresponse" value="Your request has been received. The school admin will process it soon.">
+
+    <h1>School Document Request Form</h1>
+
+    <h2 style="text-align: left;">
+      <span style="font-family: impact, sans-serif; font-size: 18pt;">
+        Student Document Request Form
+      </span>
+    </h2>
+
+    <p style="text-align: left; font-size: 12pt;">
+      Welcome to <em>QUESTIFY's</em> request form. Please fill up the needed 
+      information and select your required document for smooth processing.
+    </p>
+
+    <ul style="text-align: left; font-size: 12pt;">
+      <li>Fill up your name in Last Name, First Name, MI format.</li>
+      <li>Put your LRN for verification.</li>
+      <li>Provide your current Grade and Section.</li>
+      <li>Enter your active email address for notifications.</li>
+      <li>Select your needed document; add details if necessary.</li>
+      <li>Submit your request and wait for your confirmation email.</li>
+    </ul>
+
+    <!-- FINAL WORKING FORM -->
+    <form id="requestForm" style="padding-left: 40px;">
+
+      <input name="full_name" type="text" required placeholder="Full Name"><br>
+      <input name="student_lrn" type="text" required placeholder="Student's LRN"><br>
+      <input name="grade_section" type="text" required placeholder="Your Grade and Section"><br>
+      <input name="email" type="email" required placeholder="Your Email"><br>
+
+      <select name="document_type" required>
+        <option value="">-- Select Document --</option>
+        <option value="Transcript">Transcript</option>
+        <option value="Certificate">Certificate</option>
+        <option value="Recommendation Letter">Recommendation Letter</option>
+      </select><br>
+
+      <textarea name="additional_info" placeholder="Additional Info (if any)"></textarea><br>
 
       <button type="submit">Submit Request</button>
+
     </form>
   </div>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script>
+    // Initialize EmailJS with your PUBLIC KEY
+    emailjs.init("AEp6caL5vX8Yt2-Ln");
+
+    document.getElementById("requestForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm("service_kypw3ko", "template_4cmy51i", this)
+        .then(() => {
+          alert("Your request has been sent successfully!");
+          document.getElementById("requestForm").reset();
+        })
+        .catch((error) => {
+          console.error("EmailJS Error:", error);
+          alert("There was an error sending your request.");
+        });
+    });
+  </script>
+
 </body>
 </html>
